@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: url("{{url_for('static', filename='images/background_yes.jpeg')}}") center/cover no-repeat fixed;
+            font-family: 'Cursive', cursive;
+        }
+
+        #rose-container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .rose {
+            width: 300px;
+            height: 300px;
+            display: none;
+            position: absolute;
+            animation: roseAnimation 1s forwards;
+        }
+
+        #rose1 {
+            animation-delay: 1s;
+            bottom: -100px;
+            left: 15%;
+        }
+
+        #rose2 {
+            animation-delay: 2s;
+            transform: scaleY(-1);
+            top: -100px;
+        }
+
+        #rose3 {
+            animation-delay: 3s;
+            bottom: -100px;
+            right: 15%;
+        }
+
+        #text-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .text {
+            font-size: 35px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 1s, transform 1s;
+            color: #F4C2C2;
+        }
+
+        #text1 {
+            order: 1;
+        }
+
+        #text2 {
+            order: 2;
+        }
+
+        #text3 {
+            order: 3;
+        }
+
+        #heart {
+            font-size: 8em;
+            animation: heartbeat 1.0s infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 1s, transform 1s;
+            order: 4;
+            color: #BF40BF;
+        }
+
+        .slide-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #proceed-button {
+            display: none;
+            margin-top: 20px;
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            background-color: rgb(0, 123, 255);
+            z-index: 2;
+            transition: transform 0.3s, background-color 0.3s;
+            width: 30%;
+        }
+
+        #proceed-button:hover{
+            transform: scale(1.2);
+            background-color: #F4C2C2;
+			color: white;
+        }
+
+        #proceed-container{
+            position: absolute;
+            top: 90%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #hi-text {
+            display: none;
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @keyframes roseAnimation {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+    <title>Roses Animation</title>
+</head>
+<body>
+    <div id="rose-container">
+        <img src="{{url_for('static', filename='images/rose.png')}}" alt="Rose 1" class="rose" id="rose1">
+        <img src="{{url_for('static', filename='images/rose.png')}}" alt="Rose 2" class="rose" id="rose2">
+        <img src="{{url_for('static', filename='images/rose.png')}}" alt="Rose 3" class="rose" id="rose3">
+    </div>
+    <div id="text-container">
+        <div class="text" id="text1">I</div>
+        <div class="text" id="text2">Love</div>
+        <div class="text" id="text3">You</div>
+        <div id="heart">&#10084;</div>
+    </div>
+    <div id = "proceed-container">
+    <button id="proceed-button" onclick="changePage()">Proceed, My Love</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            animateRoses();
+        });
+
+        function animateRoses() {
+            setTimeout(() => {
+                document.getElementById("rose1").style.display = "block";
+                document.getElementById("rose1").style.bottom = "0";
+            }, 1000);
+
+            setTimeout(() => {
+                document.getElementById("rose2").style.display = "block";
+                document.getElementById("rose2").style.top = "0";
+            }, 2000);
+
+            setTimeout(() => {
+                document.getElementById("rose3").style.display = "block";
+                document.getElementById("rose3").style.bottom = "0";
+            }, 3000);
+
+            setTimeout(() => {
+                document.getElementById("text-container").style.display = "flex";
+                document.getElementById("proceed-container").style.display = "flex";
+                document.getElementById("text1").style.opacity = "1";
+                document.getElementById("text1").classList.add("slide-in");
+            }, 4000);
+
+            setTimeout(() => {
+                document.getElementById("text2").style.opacity = "1";
+                document.getElementById("text2").classList.add("slide-in");
+            }, 5000);
+
+            setTimeout(() => {
+                document.getElementById("text3").style.opacity = "1";
+                document.getElementById("text3").classList.add("slide-in");
+            }, 6000);
+
+            setTimeout(() => {
+                document.getElementById("heart").style.opacity = "1";
+                document.getElementById("heart").classList.add("slide-in");
+            }, 7000);
+
+            setTimeout(() => {
+                document.getElementById("proceed-button").style.display = "block";
+            }, 10000);
+        }
+
+        function changePage(){
+            window.location.href = "{{url_for('message_hehe')}}"
+        }
+        
+    </script>
+</body>
+</html>

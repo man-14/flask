@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+			background: url("{{url_for('static' , filename = 'images/background.jpeg')}}") center/cover no-repeat fixed;
+            margin: 0;
+            font-family: 'Cursive', cursive;
+			position: relative;
+            cursor: url("{{url_for('static' , filename = 'images/cursor.png')}}"), auto;
+        }
+
+		#container {
+            text-align: center;
+			z-index: 1;
+        }
+
+        #heart {
+            font-size: 8em;
+            color: #BF40BF;
+            animation: heartbeat 1.0s infinite;
+        }
+
+        #options {
+            margin-top: 20px;
+        }
+
+        .button {
+            font-size: 1.2em;
+			background-color: rgb(0, 123, 255);
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 15px;
+			width: 100px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        #yes:hover, #no:hover {
+            transform: scale(1.2);
+            background-color: #F4C2C2;
+			color: white;
+        }
+
+        #no {
+            margin-top: 20px;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>Will you be my valentine?</h1>
+        <div id="heart">&#10084;</div>
+        <div id="options">
+            <button id="yes" class="button" onclick="changePage()">Yes</button>
+            <button id="no" class="button" onclick="moveAway()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function moveAway() {
+                var button = document.getElementById('no');
+                var maxX = window.innerWidth - button.clientWidth;
+                var maxY = window.innerHeight - button.clientHeight;
+
+                var newX = Math.floor(Math.random() * maxX);
+                var newY = Math.floor(Math.random() * maxY);
+
+                button.style.position = 'absolute';
+                button.style.left = newX + 'px';
+                button.style.top = newY + 'px';
+            }
+
+            function changePage(){
+            window.location.href = "{{url_for('SHE_SAID_YESSSS')}}"
+        }
+    </script>
+</body>
+</html>
